@@ -3,6 +3,7 @@ package com.example.mysignup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -11,13 +12,17 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    EditText birthdate;
+    EditText birthdate,email;
     Calendar myCalender;
+    EditText username;
+    MaterialButton  submit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +30,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        EditText username = (EditText) findViewById(R.id.username);
+         username =  findViewById(R.id.username);
+         email =  findViewById(R.id.email);
+         submit =  findViewById(R.id.submitbtn);
 
-        MaterialButton regbtn = (MaterialButton) findViewById(R.id.submitbtn);
 
-        regbtn.setOnClickListener(new View.OnClickListener() {
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username1 = username.getText().toString();
-                Toast.makeText(MainActivity.this,"username is"+username1,Toast.LENGTH_SHORT);
+                String uname = username.getText().toString();
+                String uemail = email.getText().toString();
+                Intent intent = new Intent(MainActivity.this,MainActivity2.class);
+                intent.putExtra("keyname",uname);
+                intent.putExtra("keyemail",uemail);
+                startActivity(intent);
             }
         });
         birthdate=(EditText) findViewById(R.id.birthdate);
